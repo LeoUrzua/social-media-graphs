@@ -1,9 +1,9 @@
-import { Module, OnModuleInit } from "@nestjs/common";
+import { Module, OnModuleInit } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppResolver } from './app.resolver';
 import { ProfileModule } from './profile/profile.module';
-import { Neo4jModule } from "nest-neo4j";
+import { Neo4jModule } from 'nest-neo4j';
 import { SeederService } from './common/seeder/seeder.service';
 
 @Module({
@@ -17,13 +17,12 @@ import { SeederService } from './common/seeder/seeder.service';
       host: 'localhost',
       port: 7687,
       username: 'neo4j',
-      password: 'couchsurfing'
+      password: 'couchsurfing',
     }),
     ProfileModule,
   ],
   providers: [AppResolver, SeederService],
 })
-
 export class AppModule implements OnModuleInit {
   constructor(private readonly seederService: SeederService) {}
 

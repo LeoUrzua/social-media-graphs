@@ -5,6 +5,6 @@ import { ProfileResolver } from './profile.resolver';
 
 @Module({
   providers: [ProfileService, ProfileResolver],
-  controllers: [ProfileController]
+  controllers: [ProfileController],
 })
 export class ProfileModule {}

@@ -20,7 +20,7 @@ export class SeederService {
           firstName: profile.firstName,
           lastName: profile.lastName,
           props: profile,
-        }
+        },
       );
     }
   }

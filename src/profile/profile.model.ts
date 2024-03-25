@@ -13,5 +13,4 @@ export class Profile {
 
   @Field({ nullable: true })
   bio?: string;
-
 }
