@@ -20,6 +20,7 @@ export class ProfileService {
 
   async findAll(): Promise<Profile[]> {
     const res = await this.neo4jService.read('MATCH (n:Profile) RETURN n');
+    if (res.records.length === 0) return [];
     return res.records.map((record) => record.get('n').properties);
   }
 

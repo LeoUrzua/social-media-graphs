@@ -10,16 +10,16 @@ import {
 import { ProfileService } from './profile.service';
 import { Profile } from './profile.model';
 
-@Resolver((of) => Profile)
+@Resolver(() => Profile)
 export class ProfileResolver {
   constructor(private profileService: ProfileService) {}
 
-  @ResolveField('friends', (retudns) => [Profile], { nullable: 'itemsAndList' })
+  @ResolveField('friends', () => [Profile], { nullable: 'itemsAndList' })
   async getFriends(@Parent() profile: Profile): Promise<Profile[] | null> {
     return this.profileService.findFriendsById(profile.id);
   }
 
-  @Query((returns) => [Profile])
+  @Query(() => [Profile])
   async profiles(): Promise<Profile[]> {
     return this.profileService.findAll();
   }

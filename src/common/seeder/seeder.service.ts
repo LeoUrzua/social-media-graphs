@@ -7,8 +7,6 @@ export class SeederService {
 
   async seed() {
     const profiles = [
-      // { firstName: 'John', lastName: 'Doe' },
-      // { firstName: 'Jane', lastName: 'Doe' },
       { id: '1', firstName: 'John', lastName: 'Doe' },
       { id: '2', firstName: 'Jane', lastName: 'Doe' },
       { id: '3', firstName: 'Alice', lastName: 'Smith' },
@@ -23,14 +21,6 @@ export class SeederService {
 
     for (const profile of profiles) {
       await this.neo4jService.write(
-        // `MERGE (n:Profile {firstName: $firstName, lastName: $lastName})
-        // ON CREATE SET n.id = apoc.create.uuid(), n += $props
-        // RETURN n`,
-        // {
-        //   firstName: profile.firstName,
-        //   lastName: profile.lastName,
-        //   props: profile,
-        // },
         `MERGE (n:Profile {id: $id})
          ON CREATE SET n.firstName = $firstName, n.lastName = $lastName`,
         profile,
