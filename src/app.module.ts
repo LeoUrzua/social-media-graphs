@@ -5,6 +5,7 @@ import { AppResolver } from './app.resolver';
 import { ProfileModule } from './profile/profile.module';
 import { Neo4jModule } from 'nest-neo4j';
 import { SeederService } from './common/seeder/seeder.service';
+import { Neo4jScheme } from 'nest-neo4j/src/interfaces/neo4j-connection.interface';
 
 @Module({
   imports: [
@@ -13,11 +14,11 @@ import { SeederService } from './common/seeder/seeder.service';
       autoSchemaFile: 'schema.gql',
     }),
     Neo4jModule.forRoot({
-      scheme: 'neo4j',
-      host: 'localhost',
-      port: 7687,
-      username: 'neo4j',
-      password: 'couchsurfing',
+      scheme: (process.env.NEO4J_SCHEME as Neo4jScheme) || 'neo4j',
+      host: process.env.NEO4J_HOST || 'localhost',
+      port: parseInt(process.env.NEO4J_PORT, 10) || 7687,
+      username: process.env.NEO4J_USER || 'neo4j',
+      password: process.env.NEO4J_PASSWORD || 'couchsurfing',
     }),
     ProfileModule,
   ],

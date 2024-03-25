@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
+COPY wait-for-it.sh /wait-for-it.sh
 
 # Install dependencies
 RUN npm install
