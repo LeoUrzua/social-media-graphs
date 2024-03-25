@@ -41,7 +41,7 @@ These instructions will get you a copy of the project up and running on your loc
 Clone the repository:
 
 ```bash
-git clone TBD
+git clone https://github.com/LeoUrzua/social-media-graphs
 ```
 
 Build and run the project using Docker compose:
