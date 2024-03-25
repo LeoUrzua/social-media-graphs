@@ -94,8 +94,7 @@ type Mutation {
 
 Note: the graph is not updated in real-time. It is a representation of the initial data. The initial data is seeded when the application starts.
 
-![graph.png](..%2F..%2F..%2F..%2FDownloads%2Fgraph.png)
-
+![graph](./images/graph.png)
 
 ## Usage
 
