@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('GraphQL (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,10 +15,32 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it('profiles query', () => {
+    const getProfilesQuery = `
+      query {
+        profiles {
+          id
+          firstName
+          lastName
+        }
+      }
+    `;
+
     return request(app.getHttpServer())
-      .get('/')
+      .post('/graphql')
+      .send({
+        operationName: null,
+        variables: {},
+        query: getProfilesQuery,
+      })
       .expect(200)
-      .expect('Hello World!');
+      .expect((res) => {
+        expect(res.body.data).toBeDefined();
+        expect(res.body.data.profiles).toBeInstanceOf(Array);
+      });
   });
 });
