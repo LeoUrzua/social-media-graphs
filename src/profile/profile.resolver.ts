@@ -13,6 +13,6 @@ export class ProfileResolver {
 
   @Query(() => Profile, { nullable: true })
   async profile(@Args('id') id: string): Promise<Profile | undefined> {
-    return this.profileService.findOne();
+    return this.profileService.findOne(id);
   }
 }
