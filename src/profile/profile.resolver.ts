@@ -5,6 +5,7 @@ import {
   Mutation,
   ResolveField,
   Parent,
+  Int,
 } from '@nestjs/graphql';
 import { ProfileService } from './profile.service';
 import { Profile } from './profile.model';
@@ -26,6 +27,17 @@ export class ProfileResolver {
   @Query(() => Profile, { nullable: true })
   async profile(@Args('id') id: string): Promise<Profile | undefined> {
     return this.profileService.findOne(id);
+  }
+
+  @Query(() => Int)
+  async relationshipDistance(
+    @Args('profileId') profileId: string,
+    @Args('targetProfileId') targetProfileId: string,
+  ): Promise<number> {
+    return this.profileService.getShortestRelationshipDistance(
+      profileId,
+      targetProfileId,
+    );
   }
 
   @Mutation(() => Profile)

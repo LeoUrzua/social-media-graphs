@@ -92,4 +92,24 @@ export class ProfileService {
 
     return profile;
   }
+
+  async getShortestRelationshipDistance(
+    profileId: string,
+    targetProfileId: string,
+  ): Promise<number> {
+    const result = await this.neo4jService.read(
+      `
+      MATCH (start:Profile {id: $profileId}), (end:Profile {id: $targetProfileId}),
+      path = shortestPath((start)-[:FRIEND*]-(end))
+      RETURN length(path) as distance      
+       `,
+      { profileId, targetProfileId },
+    );
+
+    if (result.records.length === 0) {
+      throw new Error('No relationship found');
+    }
+
+    return result.records[0].get('distance').toNumber();
+  }
 }
