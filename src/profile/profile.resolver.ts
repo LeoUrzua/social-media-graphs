@@ -51,6 +51,11 @@ export class ProfileResolver {
     return this.profileService.create({ firstName, lastName, bio });
   }
 
+  @Mutation(() => Boolean)
+  async removeProfile(@Args('id') id: string): Promise<boolean> {
+    return this.profileService.remove(id);
+  }
+
   @Mutation(() => Profile)
   async addFriend(
     @Args('profileId') profileId: string,

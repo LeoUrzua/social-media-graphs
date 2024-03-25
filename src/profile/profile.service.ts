@@ -57,6 +57,19 @@ export class ProfileService {
     return newProfile;
   }
 
+  async remove(id: string): Promise<boolean> {
+    const result = await this.neo4jService.write(
+      `MATCH (p:Profile {id: $id}) DETACH DELETE p RETURN p`,
+      { id },
+    );
+
+    if (result.records.length === 0) {
+      throw new Error('Profile deletion failed');
+    }
+
+    return true;
+  }
+
   async addFriend(profileId: string, friendId: string): Promise<Profile> {
     const result = await this.neo4jService.write(
       `MATCH (p:Profile {id: $profileId})

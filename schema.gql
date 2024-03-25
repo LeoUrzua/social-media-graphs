@@ -19,6 +19,7 @@ type Query {
 
 type Mutation {
   createProfile(firstName: String!, lastName: String!, bio: String): Profile!
+  removeProfile(id: String!): Boolean!
   addFriend(profileId: String!, friendId: String!): Profile!
   removeFriend(profileId: String!, friendId: String!): Profile!
 }
