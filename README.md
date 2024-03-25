@@ -102,6 +102,11 @@ Note: the graph is not updated in real-time. It is a representation of the initi
 After running the project, you can use the GraphQL playground to interact with the API.
 http://localhost:3000/
 
+The database can be accessed at http://localhost:7474/browser/
+
+
+### Examples
+
 Query profiles:
 ```graphql
 {
@@ -190,3 +195,10 @@ I would like to add more features to the API, such as:
     - Accept friend request
     - Reject friend request
     - Cancel friend request
+
+## Challenges
+  - Learning NestJS.
+
+  - Learning Neo4j and Cypher query language.
+
+  - Setting up the Neo4j database in a Docker container.
