@@ -1,0 +1,11 @@
+type Profile {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    bio: String
+}
+
+extend type Query {
+    profile(id: ID!): Profile
+    profiles: [Profile!]!
+}
