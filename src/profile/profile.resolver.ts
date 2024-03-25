@@ -34,6 +34,8 @@ export class ProfileResolver {
     @Args('profileId') profileId: string,
     @Args('targetProfileId') targetProfileId: string,
   ): Promise<number> {
+    if (profileId === targetProfileId) return 0;
+
     return this.profileService.getShortestRelationshipDistance(
       profileId,
       targetProfileId,

@@ -107,7 +107,7 @@ export class ProfileService {
     );
 
     if (result.records.length === 0) {
-      throw new Error('No relationship found');
+      return -1;
     }
 
     return result.records[0].get('distance').toNumber();
