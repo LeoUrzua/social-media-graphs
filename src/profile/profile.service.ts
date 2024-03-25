@@ -10,4 +10,11 @@ export class ProfileService {
     const res = await this.neo4jService.read('MATCH (n:Profile) RETURN n');
     return res.records.map((record) => record.get('n').properties);
   }
+
+  async findOne(): Promise<Profile> {
+    const res = await this.neo4jService.read(
+      'MATCH (n:Profile) RETURN n LIMIT 1',
+    );
+    return res.records[0].get('n').properties;
+  }
 }
