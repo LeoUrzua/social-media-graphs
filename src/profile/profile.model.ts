@@ -13,4 +13,7 @@ export class Profile {
 
   @Field({ nullable: true })
   bio?: string;
+
+  @Field(() => [Profile], { nullable: 'itemsAndList' }) // This allows both the list and its items to be null
+  friends?: Profile[];
 }
