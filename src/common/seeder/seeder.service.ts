@@ -14,7 +14,7 @@ export class SeederService {
     for (const profile of profiles) {
       await this.neo4jService.write(
         `MERGE (n:Profile {firstName: $firstName, lastName: $lastName})
-        ON CREATE SET n += $props
+        ON CREATE SET n.id = apoc.create.uuid(), n += $props
         RETURN n`,
         {
           firstName: profile.firstName,
