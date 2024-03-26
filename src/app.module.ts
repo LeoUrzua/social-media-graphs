@@ -1,7 +1,6 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { AppResolver } from './app.resolver';
 import { ProfileModule } from './profile/profile.module';
 import { Neo4jModule } from 'nest-neo4j';
 import { SeederService } from './common/seeder/seeder.service';
@@ -22,7 +21,7 @@ import { Neo4jScheme } from 'nest-neo4j/src/interfaces/neo4j-connection.interfac
     }),
     ProfileModule,
   ],
-  providers: [AppResolver, SeederService],
+  providers: [SeederService],
 })
 export class AppModule implements OnModuleInit {
   constructor(private readonly seederService: SeederService) {}

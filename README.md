@@ -83,7 +83,6 @@ type Profile {
 }
 
 type Query {
-  hello: String!
   profiles: [Profile!]!
   profile(id: String!): Profile
   relationshipDistance(profileId: String!, targetProfileId: String!): Int!
