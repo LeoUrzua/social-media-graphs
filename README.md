@@ -85,8 +85,16 @@ type Query {
 
 type Mutation {
   createProfile(firstName: String!, lastName: String!, bio: String): Profile!
+  removeProfile(id: String!): Boolean!
+  updateProfile(id: String!, input: UpdateProfileInput!): Profile!
   addFriend(profileId: String!, friendId: String!): Profile!
   removeFriend(profileId: String!, friendId: String!): Profile!
+}
+
+input UpdateProfileInput {
+  firstName: String
+  lastName: String
+  bio: String
 }
 ```
 
@@ -179,6 +187,27 @@ relationship distance:
         profileId: "10"
         targetProfileId: "1"
     )
+}
+```
+
+remove a profile:
+```graphql
+mutation {
+  removeProfile(id: "1")
+}
+```
+
+update a profile:
+```graphql
+mutation {
+	updateProfile(id: "1", input: {
+    firstName: "tron",
+    lastName: "legacy"
+  }){
+    id
+    firstName
+    lastName
+  }
 }
 ```
 
