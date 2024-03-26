@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Profile } from './profile.model';
 import { Neo4jService } from 'nest-neo4j/dist';
-import { CreateProfileDto } from './dto/profile.dto';
+import { CreateProfileDto, UpdateProfileDto } from './dto/profile.dto';
 
 @Injectable()
 export class ProfileService {
@@ -68,6 +68,35 @@ export class ProfileService {
     }
 
     return true;
+  }
+
+  async update(
+    id: string,
+    updateProfileDto: UpdateProfileDto,
+  ): Promise<Profile> {
+    const updates = Object.entries(updateProfileDto)
+      .filter(([, value]) => value !== undefined)
+      .map(([key]) => `p.${key} = $${key}`)
+      .join(', ');
+
+    if (!updates) {
+      throw new Error('No updates provided');
+    }
+    const query = `
+    MATCH (p:Profile {id: $id})
+    SET ${updates}
+    RETURN p
+  `;
+
+    const parameters = { id, ...updateProfileDto };
+
+    const result = await this.neo4jService.write(query, parameters);
+
+    if (result.records.length === 0) {
+      throw new Error('Profile update failed');
+    }
+
+    return result.records[0].get('p').properties as Profile;
   }
 
   async addFriend(profileId: string, friendId: string): Promise<Profile> {
