@@ -16,10 +16,16 @@ Serves CRUD endpoints for the user resource
 Has an additional endpoint that finds the relationship distance from one user to another user (this user is a 2nd, 3rd, distance relationship)
 ```
 
-Decisions:
-- I decided to use GraphQL instead of REST because it is more flexible and allows clients to request only the data they need.
-- I decided to use Neo4j as the database because it is a graph database, and it is well suited for social network applications.
-
+## Architectural Decisions
+- GraphQL over REST
+  - Chosen for its flexibility in data retrieval, allowing clients to specify exactly what they need
+- Neo4j Graph Database
+  - Chosen for its ability to represent relationships between profiles in a more natural way
+  - Cypher query language is well suited for querying graph data
+- Profile entity over User entity
+  - Chosen to avoid confusion with authentication and authorization
+  - The focus is on the profile data, not the user data
+  
 ## Features
 
 - CRUD operations for user profiles.
